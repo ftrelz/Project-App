@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_items">
+        <item>@string/app_name</item>
+        <item>@string/l1</item>
+        <item>@string/l2</item>
+        <item>@string/l3</item>
+        <item>@string/l4</item>
+        <item>@string/app_name</item>
+        <item>@string/l1</item>
+        <item>@string/l2</item>
+        <item>@string/l3</item>
+        <item>@string/l4</item>
+        <item>@string/app_name</item>
+        <item>@string/l1</item>
+        <item>@string/l2</item>
+        <item>@string/l3</item>
+        <item>@string/l4</item>
+        <item>@string/app_name</item>
+        <item>@string/l1</item>
+        <item>@string/l2</item>
+        <item>@string/l3</item>
+        <item>@string/l4</item>
+    </string-array>
+</resources>
