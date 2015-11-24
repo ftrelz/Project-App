@@ -13,6 +13,7 @@
         android:entries="@array/list_items" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/new_project"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
