@@ -4,4 +4,7 @@
     <string name="l2">list 2</string>
     <string name="l3">list 3</string>
     <string name="l4">list 4</string>
+    <string name="project_title_hint">Enter a title for your project</string>
+    <string name="project_title_label">Title</string>
+    <string name="project_details">Enter Details</string>
 </resources>
