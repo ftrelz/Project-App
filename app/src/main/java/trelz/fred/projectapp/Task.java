@@ -2,30 +2,41 @@ package trelz.fred.projectapp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by ftrel on 11/20/2015.
  */
-public class Task {
-    public Task(String name, Calendar deadline) {
-        this.name = name;
-        this.deadline = deadline;
+public class Task
+{
+
+    public Task(String name, Date deadline)
+    {
+        mName = name;
+        mDeadline= deadline;
     }
 
-    public String getName() {
-        return name;
+    public Task()
+    {
+        mId = UUID.randomUUID();
+        mDeadline = new Date();
     }
+
+    public String getName() { return mName; }
+
+    public UUID getId() { return mId; }
 
     public void setName(String newName) {
-        name = newName;
+        mName = newName;
     }
 
-    public Calendar getDeadline() {
-        return deadline;
+    public Date getDeadline() {
+        return mDeadline;
     }
 
-    public void setDeadline(Calendar newDeadline) {
-        deadline = newDeadline;
+    public void setDeadline(Date newDeadline) {
+        mDeadline = newDeadline;
     }
 
     public void setDescription(String newDescription) {
@@ -44,8 +55,9 @@ public class Task {
         subTaskArrayList.remove(index);
     }
 
-    String name;
-    Calendar deadline;
-    String description;
-    ArrayList<SubTask> subTaskArrayList;
+    private UUID mId;
+    private String mName;
+    private Date mDeadline;
+    private String description;
+    private ArrayList<SubTask> subTaskArrayList;
 }

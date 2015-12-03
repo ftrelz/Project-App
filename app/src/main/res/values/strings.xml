@@ -6,5 +6,6 @@
     <string name="l4">list 4</string>
     <string name="project_title_hint">Enter a title for your project</string>
     <string name="project_title_label">Title</string>
-    <string name="project_details">Enter Details</string>
+    <string name="project_details">Details</string>
+    <string name="project_description_hint">Enter Description</string>
 </resources>
