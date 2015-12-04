@@ -1,13 +1,18 @@
 package trelz.fred.projectapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import java.util.*;
+
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -19,6 +24,11 @@ public class TaskFragment extends Fragment{
     private Task mTask;
     private EditText mTitleField;
     private EditText mDescriptionField;
+    private Button mDateButton;
+
+    private static final int REQUEST_DATE = 0;
+    private static final String DIALOG_DATE = "DialogDate";
+
 
     public static TaskFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
@@ -78,6 +88,36 @@ public class TaskFragment extends Fragment{
             }
         });
 
+        mDateButton = (Button) v.findViewById(R.id.project_date);
+        updateDate();
+        mDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                DateFragment dialog = DateFragment
+                        .newInstance(mTask.getDeadline());
+                dialog.setTargetFragment(TaskFragment.this, REQUEST_DATE);
+                dialog.show(manager, DIALOG_DATE);
+            }
+        });
+
         return v;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_DATE) {
+            Date date = (Date) data
+                    .getSerializableExtra(DateFragment.USER_DATE);
+            mTask.setDeadline(date);
+            updateDate();
+        }
+    }
+
+    private void updateDate() {
+        mDateButton.setText(mTask.getDeadline().toString());
     }
 }
