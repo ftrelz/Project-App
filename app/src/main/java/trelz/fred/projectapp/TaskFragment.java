@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+
+import java.sql.Time;
 import java.util.*;
 
 import android.support.v4.app.FragmentManager;
@@ -25,9 +27,12 @@ public class TaskFragment extends Fragment{
     private EditText mTitleField;
     private EditText mDescriptionField;
     private Button mDateButton;
+    private Button mTimeButton;
 
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_TIME = 1;
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_TIME = "DialogTime";
 
 
     public static TaskFragment newInstance(UUID crimeId){
@@ -95,9 +100,22 @@ public class TaskFragment extends Fragment{
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DateFragment dialog = DateFragment
-                        .newInstance(mTask.getDeadline());
+                        .newInstance(mTask.getDeadlineDate());
                 dialog.setTargetFragment(TaskFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
+            }
+        });
+
+        mTimeButton = (Button) v.findViewById(R.id.project_time);
+        updateDate();
+        mTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                TimeFragment dialog = TimeFragment
+                        .newInstance(mTask.getDeadlineTime());
+                dialog.setTargetFragment(TaskFragment.this, REQUEST_TIME);
+                dialog.show(manager, DIALOG_TIME);
             }
         });
 
@@ -112,12 +130,13 @@ public class TaskFragment extends Fragment{
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data
                     .getSerializableExtra(DateFragment.USER_DATE);
-            mTask.setDeadline(date);
+            mTask.setDeadlineDate(date);
             updateDate();
         }
     }
 
     private void updateDate() {
-        mDateButton.setText(mTask.getDeadline().toString());
+        mDateButton.setText(mTask.getDeadlineDate().toString());
     }
+
 }

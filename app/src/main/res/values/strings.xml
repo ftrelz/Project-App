@@ -9,4 +9,5 @@
     <string name="project_details">Details</string>
     <string name="project_description_hint">Enter Description</string>
     <string name="date_title">Date of Task:</string>
+    <string name="time_title">Time of Task:</string>
 </resources>

@@ -36,8 +36,27 @@
         android:textAlignment="center"
         android:hint="@string/project_description_hint"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Due Date"
+        style="?android:listSeparatorTextViewStyle"/>
+
     <Button
         android:id="@+id/project_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Due Time"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <Button
+        android:id="@+id/project_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"

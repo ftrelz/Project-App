@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 
 import android.os.Bundle;
 import android.app.Dialog;
+import android.widget.TimePicker;
 
 /**
  * Created by jc_cisneros21 on 12/3/15.
@@ -47,8 +48,9 @@ public class DateFragment extends DialogFragment {
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_date, null);
 
-        mDate = (DatePicker) v.findViewById(R.id.dialog_date_date_picker);
+        mDate = (DatePicker) v.findViewById(R.id.dialog_date_picker);
         mDate.init(year, month, day, null);
+
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
@@ -78,6 +80,4 @@ public class DateFragment extends DialogFragment {
         getTargetFragment()
                 .onActivityResult(getTargetRequestCode(), resultCode, intent);
     }
-
-
 }

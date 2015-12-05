@@ -72,7 +72,7 @@ public class TaskListFragment extends Fragment {
         public void bindTask(Task task) {
             mTask = task;
             mTitleTextView.setText(mTask.getName());
-            mDateTextView.setText(mTask.getDeadline().toString());
+            mDateTextView.setText(mTask.getDeadlineDate().toString());
         }
 
         @Override

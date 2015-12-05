@@ -1,7 +1,7 @@
 package trelz.fred.projectapp;
 
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -11,16 +11,18 @@ import java.util.UUID;
 public class Task
 {
 
-    public Task(String name, Date deadline)
+    public Task(String name, Date deadline, Date time)
     {
         mName = name;
-        mDeadline= deadline;
+        mDeadlineDate = deadline;
+        mDeadlineTime = time;
     }
 
     public Task()
     {
         mId = UUID.randomUUID();
-        mDeadline = new Date();
+        mDeadlineDate = new Date();
+        mDeadlineTime = new Date();
     }
 
     public String getName() { return mName; }
@@ -31,12 +33,18 @@ public class Task
         mName = newName;
     }
 
-    public Date getDeadline() {
-        return mDeadline;
+    public Date getDeadlineDate() {
+        return mDeadlineDate;
     }
 
-    public void setDeadline(Date newDeadline) {
-        mDeadline = newDeadline;
+    public void setDeadlineDate(Date newDeadlineDate) {
+        mDeadlineDate = newDeadlineDate;
+    }
+
+    public Date getDeadlineTime() { return mDeadlineTime; }
+
+    public void setDeadlineTime( Time newDeadlineTime ) {
+        mDeadlineTime = newDeadlineTime;
     }
 
     public void setDescription(String newDescription) {
@@ -57,7 +65,8 @@ public class Task
 
     private UUID mId;
     private String mName;
-    private Date mDeadline;
+    private Date mDeadlineDate;
+    private Date mDeadlineTime;
     private String description;
     private ArrayList<SubTask> subTaskArrayList;
 }
