@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-
-import java.sql.Time;
 import java.util.*;
 
 import android.support.v4.app.FragmentManager;
@@ -127,12 +125,28 @@ public class TaskFragment extends Fragment{
             return;
         }
 
-        if (requestCode == REQUEST_DATE) {
-            Date date = (Date) data
-                    .getSerializableExtra(TimeFragment.USER_TIME);
-            mTask.setDeadlineTime(date);
-            updateTime();
-        }
+            if (requestCode == REQUEST_DATE) {
+                Date date = (Date) data
+                        .getSerializableExtra(DateFragment.USER_DATE);
+                date.setHours(mTask.getHour());
+                date.setMinutes(mTask.getMinute());
+                mTask.setDeadlineDate(date);
+                mTask.setDeadlineTime(date);
+                updateDate();
+                updateTime();
+            }
+
+            if (requestCode == REQUEST_TIME) {
+                Date time = (Date) data
+                        .getSerializableExtra(TimeFragment.USER_TIME);
+                time.setYear(mTask.getYear());
+                time.setMonth(mTask.getMonth());
+                time.setDate(mTask.getDay());
+                mTask.setDeadlineTime(time);
+                mTask.setDeadlineDate(time);
+                updateTime();
+                updateDate();
+            }
     }
 
     private void updateDate() {

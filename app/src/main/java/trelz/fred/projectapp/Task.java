@@ -8,26 +8,27 @@ import java.util.UUID;
 /**
  * Created by ftrel on 11/20/2015.
  */
-public class Task
-{
+public class Task {
 
-    public Task(String name, Date deadline, Date time)
-    {
+    public Task(String name, Date deadline, Date time) {
         mName = name;
         mDeadlineDate = deadline;
         mDeadlineTime = time;
     }
 
-    public Task()
-    {
+    public Task() {
         mId = UUID.randomUUID();
         mDeadlineDate = new Date();
         mDeadlineTime = new Date();
     }
 
-    public String getName() { return mName; }
+    public String getName() {
+        return mName;
+    }
 
-    public UUID getId() { return mId; }
+    public UUID getId() {
+        return mId;
+    }
 
     public void setName(String newName) {
         mName = newName;
@@ -41,9 +42,11 @@ public class Task
         mDeadlineDate = newDeadlineDate;
     }
 
-    public Date getDeadlineTime() { return mDeadlineTime; }
+    public Date getDeadlineTime() {
+        return mDeadlineTime;
+    }
 
-    public void setDeadlineTime( Date newDeadlineTime ) {
+    public void setDeadlineTime(Date newDeadlineTime) {
         mDeadlineTime = newDeadlineTime;
     }
 
@@ -61,6 +64,31 @@ public class Task
 
     public void deleteSubTask(int index) {
         subTaskArrayList.remove(index);
+    }
+
+    public void newDate(int year, int month, int date, int hour, int min) {
+        mDeadlineDate = new Date(year, month, date, hour, min);
+        mDeadlineTime = new Date(year, month, date, hour, min);
+    }
+
+    public int getHour() {
+        return mDeadlineTime.getHours();
+    }
+
+    public int getMinute() {
+        return mDeadlineTime.getMinutes();
+    }
+
+    public int getYear() {
+        return mDeadlineDate.getYear();
+    }
+
+    public int getMonth() {
+        return mDeadlineDate.getMonth();
+    }
+
+    public int getDay() {
+        return mDeadlineDate.getDay();
     }
 
     private UUID mId;

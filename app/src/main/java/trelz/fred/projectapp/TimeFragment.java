@@ -49,10 +49,8 @@ public class TimeFragment extends DialogFragment{
 
         mTime = (TimePicker) v.findViewById(R.id.dialog_time_picker);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mTime.setHour(hour);
-            mTime.setMinute(minute);
-        }
+        mTime.setCurrentHour(hour);
+        mTime.setCurrentMinute(minute);
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
@@ -63,10 +61,9 @@ public class TimeFragment extends DialogFragment{
                             public void onClick(DialogInterface dialog, int which) {
                                 int hour = 0;
                                 int minute = 0;
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                    hour = mTime.getHour();
-                                    minute = mTime.getMinute();
-                                }
+                                System.out.println("GETTING HOUR AND MINUTE");
+                                hour = mTime.getCurrentHour();
+                                minute = mTime.getCurrentMinute();
                                 int year = calendar.get(Calendar.YEAR);
                                 int month = calendar.get(Calendar.MONTH);
                                 int day = calendar.get(Calendar.DAY_OF_MONTH);

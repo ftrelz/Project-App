@@ -2,18 +2,25 @@
 <items version="2" >
 
     <item
+        jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/classes-d7372f3362b93fdfbcd4b657a52002125e936d34.jar" />
+    </item>
+    <item
+        jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/classes-9dc65806eaa282ab2fbfc9df8bd109fe7c42feaf.jar" />
+    </item>
+    <item
         jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
         <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/classes-69fa5e334eb306abf1d986429d0889064ecc48bf.jar" />
-    </item>
-    <item
-        jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-98e19b0de23f9aa1071794f3a6f892fd162fcf07.jar" />
     </item>
     <item
         jar="/Users/jc_cisneros21/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
@@ -23,11 +30,11 @@
         <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-84e3f6c9c188c4e2deca7bf8596120e45b23eabe.jar" />
     </item>
     <item
-        jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/classes-d7372f3362b93fdfbcd4b657a52002125e936d34.jar" />
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-98e19b0de23f9aa1071794f3a6f892fd162fcf07.jar" />
     </item>
     <item
         jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
@@ -35,13 +42,6 @@
         revision="23.0.2"
         sha1="09c5e804bc67fc0580360043dff067df574a60d4">
         <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/classes-4813c796f8ee0739675a51be71d963f0aa7b1881.jar" />
-    </item>
-    <item
-        jar="/Users/jc_cisneros21/Project-App/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/Users/jc_cisneros21/Project-App/app/build/intermediates/pre-dexed/debug/classes-9dc65806eaa282ab2fbfc9df8bd109fe7c42feaf.jar" />
     </item>
 
 </items>

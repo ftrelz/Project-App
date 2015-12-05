@@ -41,11 +41,11 @@ public class TaskListFragment extends Fragment {
     }
 
     private void updateUI() {
-        TaskLab crimeLab = TaskLab.get(getActivity());
-        List<Task> crimes = crimeLab.getTasks();
+        TaskLab taskLab = TaskLab.get(getActivity());
+        List<Task> tasks = taskLab.getTasks();
 
         if (mAdapter == null) {
-            mAdapter = new TaskAdapter(crimes);
+            mAdapter = new TaskAdapter(tasks);
             mTaskRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.notifyDataSetChanged();
@@ -56,7 +56,7 @@ public class TaskListFragment extends Fragment {
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
-        private TextView mDateTextView;
+        private TextView mTimeTextView;
 
         private Task mTask;
 
@@ -66,13 +66,13 @@ public class TaskListFragment extends Fragment {
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_task_title);
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_task_description);
-            mDateTextView = (TextView) itemView.findViewById(R.id.list_task_date);
+            mTimeTextView = (TextView) itemView.findViewById(R.id.list_task_time);
         }
 
         public void bindTask(Task task) {
             mTask = task;
             mTitleTextView.setText(mTask.getName());
-            mDateTextView.setText(mTask.getDeadlineDate().toString());
+            mTimeTextView.setText(mTask.getDeadlineTime().toString());
         }
 
         @Override
@@ -86,8 +86,8 @@ public class TaskListFragment extends Fragment {
 
         private List<Task> mTasks;
 
-        public TaskAdapter(List<Task> crimes) {
-            mTasks = crimes;
+        public TaskAdapter(List<Task> tasks) {
+            mTasks = tasks;
         }
 
         @Override
