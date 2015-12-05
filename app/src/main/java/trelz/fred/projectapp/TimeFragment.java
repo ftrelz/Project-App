@@ -36,8 +36,10 @@ public class TimeFragment extends DialogFragment{
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Date date = (Date) getArguments().getSerializable(ARG_TIME);
 
         final Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);

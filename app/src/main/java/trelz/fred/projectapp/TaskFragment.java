@@ -107,7 +107,7 @@ public class TaskFragment extends Fragment{
         });
 
         mTimeButton = (Button) v.findViewById(R.id.project_time);
-        updateDate();
+        updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,14 +129,18 @@ public class TaskFragment extends Fragment{
 
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data
-                    .getSerializableExtra(DateFragment.USER_DATE);
-            mTask.setDeadlineDate(date);
-            updateDate();
+                    .getSerializableExtra(TimeFragment.USER_TIME);
+            mTask.setDeadlineTime(date);
+            updateTime();
         }
     }
 
     private void updateDate() {
         mDateButton.setText(mTask.getDeadlineDate().toString());
+    }
+
+    private void updateTime() {
+        mTimeButton.setText(mTask.getDeadlineTime().toString());
     }
 
 }

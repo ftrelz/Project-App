@@ -43,7 +43,7 @@ public class Task
 
     public Date getDeadlineTime() { return mDeadlineTime; }
 
-    public void setDeadlineTime( Time newDeadlineTime ) {
+    public void setDeadlineTime( Date newDeadlineTime ) {
         mDeadlineTime = newDeadlineTime;
     }
 
