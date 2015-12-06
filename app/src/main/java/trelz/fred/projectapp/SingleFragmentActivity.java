@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.widget.Button;
 
 /**
  * Created by jc_cisneros21 on 12/1/15.
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 public abstract class SingleFragmentActivity extends FragmentActivity {
 
     protected abstract Fragment createFragment();
+    private Button mProject;
 
     @Override
     // Starts the Fragment
@@ -26,5 +29,13 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             fragment = createFragment();
             fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
+
+        mProject = (Button) v.findViewById(R.id.activity_main);
+        mProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

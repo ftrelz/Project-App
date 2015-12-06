@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+
 import java.util.*;
 
 import android.support.v4.app.FragmentManager;
@@ -18,10 +19,10 @@ import android.widget.EditText;
 /**
  * Created by jc_cisneros21 on 11/22/15.
  */
-public class TaskFragment extends Fragment{
+public class ProjectFragment extends Fragment{
 
     private static final String ARG_TASK_ID = "task_id";
-    private Task mTask;
+    private Project mProject;
     private EditText mTitleField;
     private EditText mDescriptionField;
     private Button mDateButton;
@@ -33,27 +34,36 @@ public class TaskFragment extends Fragment{
     private static final String DIALOG_TIME = "DialogTime";
 
 
-    public static TaskFragment newInstance(UUID crimeId){
+    public static ProjectFragment newInstance(UUID crimeId){
         Bundle args = new Bundle();
         args.putSerializable(ARG_TASK_ID, crimeId);
 
-        TaskFragment fragment = new TaskFragment();
+        ProjectFragment fragment = new ProjectFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Project p = new Project();
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
-        System.out.println("Printing taskId: " + taskId);
-        mTask = TaskLab.get(getActivity()).getTask(taskId);
+        for (int i = 0; i < ListLab.get(getActivity()).getListSize() ; i++ )
+        {
+            p = (Project) ListLab.get(getActivity()).getObject(i);
+            if ( p.getUUID() == taskId )
+            {
+                mProject = p;
+                return;
+            }
+        }
+        //mTask = ListLab.get(getActivity()).getTask(taskId);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_management, container, false);
 
         mTitleField = (EditText) v.findViewById(R.id.management_title);
-        mTitleField.setText(mTask.getName());
+        mTitleField.setText(mProject.getName());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -62,7 +72,7 @@ public class TaskFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTask.setName(s.toString());
+                mProject.setName(s.toString());
 
             }
 
@@ -73,7 +83,7 @@ public class TaskFragment extends Fragment{
         });
 
         mDescriptionField = (EditText) v.findViewById(R.id.management_description);
-        mDescriptionField.setText(mTask.getDescription());
+        mDescriptionField.setText(mProject.getDescription());
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -82,7 +92,7 @@ public class TaskFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTask.setDescription(s.toString());
+                mProject.setDescription(s.toString());
             }
 
             @Override
@@ -98,8 +108,8 @@ public class TaskFragment extends Fragment{
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DateFragment dialog = DateFragment
-                        .newInstance(mTask.getDeadlineDate());
-                dialog.setTargetFragment(TaskFragment.this, REQUEST_DATE);
+                        .newInstance(mProject.getDeadlineDate());
+                dialog.setTargetFragment(ProjectFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
@@ -111,8 +121,8 @@ public class TaskFragment extends Fragment{
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 TimeFragment dialog = TimeFragment
-                        .newInstance(mTask.getDeadlineTime());
-                dialog.setTargetFragment(TaskFragment.this, REQUEST_TIME);
+                        .newInstance(mProject.getDeadlineTime());
+                dialog.setTargetFragment(ProjectFragment.this, REQUEST_TIME);
                 dialog.show(manager, DIALOG_TIME);
             }
         });
@@ -128,10 +138,10 @@ public class TaskFragment extends Fragment{
             if (requestCode == REQUEST_DATE) {
                 Date date = (Date) data
                         .getSerializableExtra(DateFragment.USER_DATE);
-                date.setHours(mTask.getHour());
-                date.setMinutes(mTask.getMinute());
-                mTask.setDeadlineDate(date);
-                mTask.setDeadlineTime(date);
+                date.setHours(mProject.getHour());
+                date.setMinutes(mProject.getMinute());
+                mProject.setDeadlineDate(date);
+                mProject.setDeadlineTime(date);
                 updateDate();
                 updateTime();
             }
@@ -139,22 +149,22 @@ public class TaskFragment extends Fragment{
             if (requestCode == REQUEST_TIME) {
                 Date time = (Date) data
                         .getSerializableExtra(TimeFragment.USER_TIME);
-                time.setYear(mTask.getYear());
-                time.setMonth(mTask.getMonth());
-                time.setDate(mTask.getDay());
-                mTask.setDeadlineTime(time);
-                mTask.setDeadlineDate(time);
+                time.setYear(mProject.getYear());
+                time.setMonth(mProject.getMonth());
+                time.setDate(mProject.getDay());
+                mProject.setDeadlineTime(time);
+                mProject.setDeadlineDate(time);
                 updateTime();
                 updateDate();
             }
     }
 
     private void updateDate() {
-        mDateButton.setText(mTask.getDeadlineDate().toString());
+        mDateButton.setText(mProject.getDeadlineDate().toString());
     }
 
     private void updateTime() {
-        mTimeButton.setText(mTask.getDeadlineTime().toString());
+        mTimeButton.setText(mProject.getDeadlineTime().toString());
     }
 
 }

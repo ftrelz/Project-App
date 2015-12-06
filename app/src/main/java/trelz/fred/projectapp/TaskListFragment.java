@@ -13,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TaskListFragment extends Fragment {
 
     private RecyclerView mTaskRecyclerView;
-    private TaskAdapter mAdapter;
+    private ProjectAdapter mAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,26 +43,31 @@ public class TaskListFragment extends Fragment {
     }
 
     private void updateUI() {
-        TaskLab taskLab = TaskLab.get(getActivity());
-        List<Task> tasks = taskLab.getTasks();
+        ListLab listLab = ListLab.get(getActivity());
+        List<Project> projects;
+        ArrayList<Project> temp = new ArrayList<>();
+        for (int i = 0; i < ListLab.get(getActivity()).getListSize(); i++) {
+            temp.add((Project)ListLab.get(getActivity()).getObject(i));
+        }
+        projects = temp;
 
         if (mAdapter == null) {
-            mAdapter = new TaskAdapter(tasks);
+            mAdapter = new ProjectAdapter(projects);
             mTaskRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.notifyDataSetChanged();
         }
     }
 
-    private class TaskHolder extends RecyclerView.ViewHolder
+    private class ProjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
         private TextView mTimeTextView;
 
-        private Task mTask;
+        private Project mProject;
 
-        public TaskHolder(View itemView) {
+        public ProjectHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
@@ -69,43 +76,43 @@ public class TaskListFragment extends Fragment {
             mTimeTextView = (TextView) itemView.findViewById(R.id.list_task_time);
         }
 
-        public void bindTask(Task task) {
-            mTask = task;
-            mTitleTextView.setText(mTask.getName());
-            mTimeTextView.setText(mTask.getDeadlineTime().toString());
+        public void bindTask(Project p) {
+            mProject = p;
+            mTitleTextView.setText(mProject.getName());
+            mTimeTextView.setText(mProject.getDeadlineTime().toString());
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = MainActivity.newIntent(getActivity(), mTask.getId());
+            Intent intent = MainActivity.newIntent(getActivity(), mProject.getUUID());
             startActivity(intent);
         }
     }
 
-    private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
+    private class ProjectAdapter extends RecyclerView.Adapter<ProjectHolder> {
 
-        private List<Task> mTasks;
+        private List<Project> mProjects;
 
-        public TaskAdapter(List<Task> tasks) {
-            mTasks = tasks;
+        public ProjectAdapter(List<Project> projects) {
+            mProjects =  projects;
         }
 
         @Override
-        public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ProjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.list_task, parent, false);
-            return new TaskHolder(view);
+            return new ProjectHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(TaskHolder holder, int position) {
-            Task task = mTasks.get(position);
-            holder.bindTask(task);
+        public void onBindViewHolder(ProjectHolder holder, int position) {
+            Project project = mProjects.get(position);
+            holder.bindTask(project);
         }
 
         @Override
         public int getItemCount() {
-            return mTasks.size();
+            return mProjects.size();
         }
     }
 }

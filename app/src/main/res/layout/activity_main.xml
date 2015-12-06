@@ -3,4 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/add_project"
+        android:layout_height="wrap_content"
+        android:layout_width="93dp"
+        android:text="@string/add_project"
+        android:layout_gravity="right|bottom"/>
+
+</FrameLayout>

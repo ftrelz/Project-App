@@ -66,11 +66,6 @@ public class Task {
         subTaskArrayList.remove(index);
     }
 
-    public void newDate(int year, int month, int date, int hour, int min) {
-        mDeadlineDate = new Date(year, month, date, hour, min);
-        mDeadlineTime = new Date(year, month, date, hour, min);
-    }
-
     public int getHour() {
         return mDeadlineTime.getHours();
     }

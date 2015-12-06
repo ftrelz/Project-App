@@ -29,11 +29,11 @@ public class MainActivity extends SingleFragmentActivity {
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                TaskFragment newFragment = (TaskFragment) fm.findFragmentByTag("tag");
+                ProjectFragment newFragment = (ProjectFragment) fm.findFragmentByTag("tag");
 
                 if (newFragment == null)
                 {
-                    newFragment = new TaskFragment();
+                    newFragment = new ProjectFragment();
                     ft.add(newFragment, "tag");
                     //ft.commit();
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -57,7 +57,7 @@ public class MainActivity extends SingleFragmentActivity {
     protected Fragment createFragment() {
         UUID taskId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_TASK_ID);
-        return TaskFragment.newInstance(taskId);
+        return ProjectFragment.newInstance(taskId);
     }
 
     //ArrayList<Project> projectArrayList;

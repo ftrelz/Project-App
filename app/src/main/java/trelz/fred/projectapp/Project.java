@@ -2,15 +2,29 @@ package trelz.fred.projectapp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Fred on 11/20/2015.
  */
 public class Project {
 
-    public Project(String name, Calendar deadline) {
+    public Project(String name, Date deadlineDate, Date deadlineTime) {
+        this.id = UUID.randomUUID();
         this.name = name;
-        this.deadline = deadline;
+        this.mDeadlineDate = deadlineDate;
+        this.mDeadlineTime = deadlineTime;
+    }
+
+    public Project() {
+        this.id = UUID.randomUUID();
+        this.mDeadlineDate = new Date();
+        this.mDeadlineTime = new Date();
+    }
+
+    public UUID getUUID() {
+        return id;
     }
 
     public void setName(String name) {
@@ -29,25 +43,47 @@ public class Project {
         return description;
     }
 
-    public void setDeadline(Calendar deadline) {
-        this.deadline = deadline;
+    public void setDeadlineDate(Date deadline) {
+        this.mDeadlineDate = deadline;
     }
 
-    public Calendar getDeadline() {
-        return deadline;
+    public Date getDeadlineDate() {
+        return mDeadlineDate;
     }
 
-    public void addTask(int index, Task item) {
-        taskArrayList.add(index, item);
+    public void setDeadlineTime(Date deadline) {
+        this.mDeadlineTime = deadline;
     }
 
-    public void deleteTask(int index) {
-        taskArrayList.remove(index);
+    public Date getDeadlineTime() {
+        return mDeadlineTime;
     }
 
-    String name;
-    Calendar deadline;
-    String description;
+    public int getHour() {
+        return mDeadlineTime.getHours();
+    }
+
+    public int getMinute() {
+        return mDeadlineTime.getMinutes();
+    }
+
+    public int getYear() {
+        return mDeadlineDate.getYear();
+    }
+
+    public int getMonth() {
+        return mDeadlineDate.getMonth();
+    }
+
+    public int getDay() {
+        return mDeadlineDate.getDay();
+    }
+
+    private UUID id;
+    private String name;
+    private Date mDeadlineDate;
+    private Date mDeadlineTime;
+    private String description;
     ArrayList<Task> taskArrayList;
 
 }
