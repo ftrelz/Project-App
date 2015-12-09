@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
@@ -15,7 +18,6 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
     protected abstract Fragment createFragment();
     private Button mProject;
 
-    @Override
     // Starts the Fragment
     protected void onCreate(Bundle savedInstanceState) {
         // create an FragmentActivity
@@ -30,12 +32,20 @@ public abstract class SingleFragmentActivity extends FragmentActivity {
             fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
 
-        mProject = (Button) v.findViewById(R.id.activity_main);
+        mProject = (Button) findViewById(R.id.add_project);
         mProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("This is printing!");
+
+                Fragment project = ProjectFragment.newInstance(null);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, project);
+                ft.addToBackStack(null);
+                ft.commit();
 
             }
         });
+
     }
 }

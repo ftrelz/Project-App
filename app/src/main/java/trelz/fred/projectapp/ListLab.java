@@ -45,6 +45,11 @@ public class ListLab {
         return null;
     }
 
+    public void addObjecttoList(Object o)
+    {
+        mObjects.add(o);
+    }
+
     public int getListSize()
     {
         return mObjects.size();

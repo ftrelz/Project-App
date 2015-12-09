@@ -11,4 +11,6 @@
     <string name="date_title">Date of Task:</string>
     <string name="time_title">Time of Task:</string>
     <string name="add_project">Add a project</string>
+    <string name="task_title_hint">Enter a title for your task</string>
+    <string name="subtask_title_hint">Enter a title for your subtask</string>
 </resources>
