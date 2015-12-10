@@ -20,9 +20,9 @@ import android.widget.EditText;
 /**
  * Created by jc_cisneros21 on 11/22/15.
  */
-public class ProjectFragment extends Fragment{
+public class ProjectFragment extends Fragment {
 
-    private static final String ARG_TASK_ID = "task_id";
+    private static final String ARG_PROJECT_ID = "project_id";
     private Project mProject;
     private EditText mTitleField;
     private EditText mDescriptionField;
@@ -41,9 +41,9 @@ public class ProjectFragment extends Fragment{
     }
 
 
-    public static ProjectFragment newInstance(UUID taskId){
+    public static ProjectFragment newInstance(UUID projectId){
         Bundle args = new Bundle();
-        args.putSerializable(ARG_TASK_ID, taskId);
+        args.putSerializable(ARG_PROJECT_ID, projectId);
 
         ProjectFragment fragment = new ProjectFragment();
         fragment.setArguments(args);
@@ -53,16 +53,24 @@ public class ProjectFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Project p = new Project();
-        UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
+        UUID projectId = (UUID) getArguments().getSerializable(ARG_PROJECT_ID);
+        System.out.println(projectId);
 
-        if (ListLab.get(getActivity()).getListSize() == 0) {
+        if (ListLab.get(getActivity()).getProjectListSize() == 0) {
             mProject = p;
         } else {
-            for (int i = 0; i < ListLab.get(getActivity()).getListSize(); i++) {
-                p = (Project) ListLab.get(getActivity()).getObject(i);
-                if (p.getUUID() == taskId) {
+            for (int i = 0; i < ListLab.get(getActivity()).getProjectListSize(); i++) {
+                System.out.println("This is printing in oncreate!");
+                p = ListLab.get(getActivity()).getProject(i);
+                System.out.println(p.getUUID());
+                if (projectId.compareTo(p.getUUID()) != 0) {
+                    System.out.println("This is making a new Project!");
+                    p = new Project();
                     mProject = p;
-                    return;
+                }
+                else
+                {
+                    mProject = p;
                 }
             }
         }
@@ -72,7 +80,7 @@ public class ProjectFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_project, container, false);
 
-        mTitleField = (EditText) v.findViewById(R.id.management_title);
+        mTitleField = (EditText) v.findViewById(R.id.project_title);
         if (mProject.getName() == "") {
             mTitleField.setText("New Project");
         } else {
@@ -96,7 +104,7 @@ public class ProjectFragment extends Fragment{
             }
         });
 
-        mDescriptionField = (EditText) v.findViewById(R.id.management_description);
+        mDescriptionField = (EditText) v.findViewById(R.id.project_description);
         mDescriptionField.setText(mProject.getDescription());
         mDescriptionField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -147,14 +155,17 @@ public class ProjectFragment extends Fragment{
             public void onClick(View v) {
                 System.out.println("This is printing!");
 
-                Fragment task = TaskFragment.newInstance(null);
+                addProjecttoList(mProject);
+
+                Intent i = new Intent(getActivity(),TaskListActivity.class);
+                getActivity().startActivity(i);
+
+                /*Fragment task = SingleTaskFragmentActivity.newInstance(null);
                 FragmentTransaction ft;
                 ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment_container, task);
+                ft.replace(R.id.project_fragment_container, task);
                 ft.addToBackStack(null);
-                ft.commit();
-
-                addProjecttoList(mProject);
+                ft.commit();*/
             }
         });
 

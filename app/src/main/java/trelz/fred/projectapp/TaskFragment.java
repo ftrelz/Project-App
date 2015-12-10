@@ -22,7 +22,7 @@ import android.widget.EditText;
 public class TaskFragment extends Fragment{
 
     private static final String ARG_TASK_ID = "task_id";
-    private Project mTask;
+    private Task mTask;
     private EditText mTitleField;
     private EditText mDescriptionField;
     private Button mDateButton;
@@ -53,13 +53,13 @@ public class TaskFragment extends Fragment{
         Task t = new Task();
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
 
-        if (ListLab.get(getActivity()).getListSize() == 0) {
+        if (ListLab.get(getActivity()).getTaskListSize() == 0) {
             mTask = t;
         } else {
-            for (int i = 0; i < ListLab.get(getActivity()).getListSize(); i++) {
-                t = () ListLab.get(getActivity()).getObject(i);
-                if (p.getUUID() == taskId) {
-                    mTask = p;
+            for (int i = 0; i < ListLab.get(getActivity()).getTaskListSize(); i++) {
+                t = (Task) ListLab.get(getActivity()).getTask(i);
+                if (t.getUUID() == taskId) {
+                    mTask = t;
                     return;
                 }
             }
@@ -68,11 +68,11 @@ public class TaskFragment extends Fragment{
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_project, container, false);
+        View v = inflater.inflate(R.layout.fragment_task, container, false);
 
-        mTitleField = (EditText) v.findViewById(R.id.management_title);
+        mTitleField = (EditText) v.findViewById(R.id.task_title);
         if (mTask.getName() == "") {
-            mTitleField.setText("New Project");
+            mTitleField.setText("New Task");
         } else {
             mTitleField.setText(mTask.getName());
         }
@@ -94,26 +94,7 @@ public class TaskFragment extends Fragment{
             }
         });
 
-        mDescriptionField = (EditText) v.findViewById(R.id.management_description);
-        mDescriptionField.setText(mTask.getDescription());
-        mDescriptionField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTask.setDescription(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        mDateButton = (Button) v.findViewById(R.id.project_date);
+        mDateButton = (Button) v.findViewById(R.id.task_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +107,7 @@ public class TaskFragment extends Fragment{
             }
         });
 
-        mTimeButton = (Button) v.findViewById(R.id.project_time);
+        mTimeButton = (Button) v.findViewById(R.id.task_time);
         updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override

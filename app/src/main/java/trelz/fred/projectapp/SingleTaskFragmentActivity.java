@@ -5,47 +5,45 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 /**
  * Created by jc_cisneros21 on 12/1/15.
  */
-public abstract class SingleFragmentActivity extends FragmentActivity {
+public abstract class SingleTaskFragmentActivity extends FragmentActivity {
 
     protected abstract Fragment createFragment();
-    private Button mProject;
+    //private Button mTask;
 
     // Starts the Fragment
     protected void onCreate(Bundle savedInstanceState) {
+
         // create an FragmentActivity
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.task_main);
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        Fragment fragment = fm.findFragmentById(R.id.task_fragment_container);
 
         if (fragment == null) {
             fragment = createFragment();
-            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+            fm.beginTransaction().add(R.id.task_fragment_container, fragment).commit();
         }
 
-        mProject = (Button) findViewById(R.id.add_project);
-        mProject.setOnClickListener(new View.OnClickListener() {
+        /*mTask = (Button) findViewById(R.id.add_project);
+        mTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("This is printing!");
 
                 Fragment project = ProjectFragment.newInstance(null);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment_container, project);
+                ft.replace(R.id.project_fragment_container, project);
                 ft.addToBackStack(null);
                 ft.commit();
 
             }
-        });
+        });*/
 
     }
 }

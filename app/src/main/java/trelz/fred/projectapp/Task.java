@@ -26,7 +26,7 @@ public class Task {
         return mName;
     }
 
-    public UUID getId() {
+    public UUID getUUID() {
         return mId;
     }
 

@@ -13,7 +13,8 @@ import java.util.UUID;
 public class ListLab {
 
     private static ListLab sListLab;
-    private ArrayList<Object> mObjects;
+    private ArrayList<Project> mProjects;
+    private ArrayList<Task> mTasks;
 
     public static ListLab get(Context context) {
         if (sListLab == null) {
@@ -23,7 +24,8 @@ public class ListLab {
     }
 
     private ListLab(Context context) {
-        mObjects = new ArrayList<>();
+        mProjects = new ArrayList<>();
+        mTasks = new ArrayList<>();
 
         /*for (int i = 0; i < 100; i++) {
             Task task = new Task();
@@ -32,26 +34,54 @@ public class ListLab {
         }*/
     }
 
-    public List<Object> getObjects()
+    public List<Project> getProjects()
     {
-        return mObjects;
+        return mProjects;
     }
 
-    public Object getObject(int id) {
+    public List<Task> getTasks()
+    {
+        return mTasks;
+    }
 
-        if (id < mObjects.size()) {
-            return mObjects.get(id);
+    public Project getProject(int id) {
+
+        if (id < mProjects.size()) {
+            return mProjects.get(id);
+        }
+        return null;
+    }
+
+    public Task getTask(int id) {
+
+        if (id < mTasks.size()) {
+            return mTasks.get(id);
         }
         return null;
     }
 
     public void addObjecttoList(Object o)
     {
-        mObjects.add(o);
+        Task test = new Task();
+        if ( o.getClass() == test.getClass())
+        {
+            mTasks.add((Task) o);
+        }
+        else
+        {
+            mProjects.add((Project) o);
+            System.out.println(mProjects.get(0).getName());
+        }
     }
 
-    public int getListSize()
+    public int getProjectListSize()
     {
-        return mObjects.size();
+        return mProjects.size();
     }
+
+    public int getTaskListSize()
+    {
+        return mTasks.size();
+    }
+
 }

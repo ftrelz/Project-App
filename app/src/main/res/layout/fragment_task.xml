@@ -28,7 +28,7 @@
         style="?android:listSeparatorTextViewStyle"/>
 
     <Button
-        android:id="@+id/project_date"
+        android:id="@+id/task_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -41,7 +41,7 @@
         style="?android:listSeparatorTextViewStyle"/>
 
     <Button
-        android:id="@+id/project_time"
+        android:id="@+id/task_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -53,7 +53,7 @@
         android:layout_weight="0.30">
 
         <Button
-            android:id="@+id/poject_next"
+            android:id="@+id/task_next"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_alignParentBottom="true"

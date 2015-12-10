@@ -15,19 +15,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TaskListFragment extends Fragment {
 
     private RecyclerView mTaskRecyclerView;
-    private ProjectAdapter mAdapter;
+    private TaskAdapter mAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_task_list, container, false);
 
         mTaskRecyclerView = (RecyclerView) view
-                .findViewById(R.id.crime_recycler_view);
+                .findViewById(R.id.task_recycler_view);
         mTaskRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
@@ -44,30 +43,33 @@ public class TaskListFragment extends Fragment {
 
     private void updateUI() {
         ListLab listLab = ListLab.get(getActivity());
-        List<Project> projects;
-        ArrayList<Project> temp = new ArrayList<>();
-        for (int i = 0; i < ListLab.get(getActivity()).getListSize(); i++) {
-            temp.add((Project)ListLab.get(getActivity()).getObject(i));
+        List<Task> tasks;
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i = 0; i < ListLab.get(getActivity()).getTaskListSize(); i++) {
+            temp.add( ListLab.get(getActivity()).getTask(i));
         }
-        projects = temp;
+        tasks = temp;
 
         if (mAdapter == null) {
-            mAdapter = new ProjectAdapter(projects);
+            //System.out.println("This is printing when equals to null");
+            mAdapter = new TaskAdapter(tasks);
             mTaskRecyclerView.setAdapter(mAdapter);
         } else {
+            //System.out.println("This is printing when Data Set changed");
+            //mTaskRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         }
     }
 
-    private class ProjectHolder extends RecyclerView.ViewHolder
+    private class TaskHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
         private TextView mTimeTextView;
 
-        private Project mProject;
+        private Task mTask;
 
-        public ProjectHolder(View itemView) {
+        public TaskHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
@@ -76,43 +78,43 @@ public class TaskListFragment extends Fragment {
             mTimeTextView = (TextView) itemView.findViewById(R.id.list_task_time);
         }
 
-        public void bindTask(Project p) {
-            mProject = p;
-            mTitleTextView.setText(mProject.getName());
-            mTimeTextView.setText(mProject.getDeadlineTime().toString());
+        public void bindTask(Task p) {
+            mTask = p;
+            mTitleTextView.setText(mTask.getName());
+            mTimeTextView.setText(mTask.getDeadlineTime().toString());
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = MainActivity.newIntent(getActivity(), mProject.getUUID());
+            Intent intent = TaskActivity.newIntent(getActivity(), mTask.getUUID());
             startActivity(intent);
         }
     }
 
-    private class ProjectAdapter extends RecyclerView.Adapter<ProjectHolder> {
+    private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
 
-        private List<Project> mProjects;
+        private List<Task> mTasks;
 
-        public ProjectAdapter(List<Project> projects) {
-            mProjects =  projects;
+        public TaskAdapter(List<Task> tasks) {
+            mTasks =  tasks;
         }
 
         @Override
-        public ProjectHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.list_task, parent, false);
-            return new ProjectHolder(view);
+            return new TaskHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(ProjectHolder holder, int position) {
-            Project project = mProjects.get(position);
-            holder.bindTask(project);
+        public void onBindViewHolder(TaskHolder holder, int position) {
+            Task task = mTasks.get(position);
+            holder.bindTask(task);
         }
 
         @Override
         public int getItemCount() {
-            return mProjects.size();
+            return mTasks.size();
         }
     }
 }

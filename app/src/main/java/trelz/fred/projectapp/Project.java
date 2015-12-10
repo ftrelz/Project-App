@@ -19,6 +19,7 @@ public class Project {
 
     public Project() {
         this.id = UUID.randomUUID();
+        this.name = "New Project";
         this.mDeadlineDate = new Date();
         this.mDeadlineTime = new Date();
     }

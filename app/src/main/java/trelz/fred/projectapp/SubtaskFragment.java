@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import java.util.*;
 
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -21,7 +20,7 @@ import android.widget.EditText;
  */
 public class SubtaskFragment extends Fragment {
 
-    private static final String ARG_TASK_ID = "task_id";
+    /*private static final String ARG_TASK_ID = "task_id";
     private Project mSubTask;
     private EditText mTitleField;
     private EditText mDescriptionField;
@@ -53,10 +52,10 @@ public class SubtaskFragment extends Fragment {
         Project p = new Project();
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
 
-        if (ListLab.get(getActivity()).getListSize() == 0) {
+        if (ListLab.get(getActivity()).getProjectListSize() == 0) {
             mSubTask = p;
         } else {
-            for (int i = 0; i < ListLab.get(getActivity()).getListSize(); i++) {
+            for (int i = 0; i < ListLab.get(getActivity()).getProjectListSize(); i++) {
                 p = (Project) ListLab.get(getActivity()).getObject(i);
                 if (p.getUUID() == taskId) {
                     mSubTask = p;
@@ -137,7 +136,7 @@ public class SubtaskFragment extends Fragment {
                 dialog.setTargetFragment(ProjectFragment.this, REQUEST_TIME);
                 dialog.show(manager, DIALOG_TIME);
             }
-        });*/
+        });
 
         //mNextButton = (Button) v.findViewById(R.id.project_time);
 
@@ -179,7 +178,7 @@ public class SubtaskFragment extends Fragment {
     }
 
     private void updateTime() {
-        mTimeButton.setText(mSubTask.getDeadlineTime().toString());
-    }
+        mTimeButton.setText(mSubTask.getDeadlineTime().toString());*/
+   // }
 
 }
