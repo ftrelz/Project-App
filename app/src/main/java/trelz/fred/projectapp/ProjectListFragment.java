@@ -28,11 +28,21 @@ public class ProjectListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
 
+        ListLab listLab = ListLab.get(getActivity());
+        List<Project> projects = listLab.getProjects();
+
         mProjectRecyclerView = (RecyclerView) view
-                .findViewById(R.id.project_recycler_view);
+                    .findViewById(R.id.project_recycler_view);
         mProjectRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+        if (mAdapter == null)
+        {
+            mAdapter = new ProjectAdapter(projects);
+
+        }
+
+        mProjectRecyclerView.setAdapter(mAdapter);
+
 
         mProject = (Button) this.getActivity().findViewById(R.id.add_project);
         mProject.setVisibility(View.VISIBLE);
@@ -50,17 +60,22 @@ public class ProjectListFragment extends Fragment {
     private void updateUI() {
         ListLab listLab = ListLab.get(getActivity());
         List<Project> projects = listLab.getProjects();
-        System.out.println(projects.size());
 
-        if (mAdapter == null)
+        /*if (mAdapter == null)
         {
+            System.out.println("this is making an adapter!");
             mAdapter = new ProjectAdapter(projects);
+        }
+
+        if (!(mAdapter.hasObservers()))
+        {
             mProjectRecyclerView.setAdapter(mAdapter);
         }
         else
-        {
+        {*/
             mAdapter.notifyDataSetChanged();
-        }
+            mProjectRecyclerView.setAdapter(mAdapter);
+        //}
     }
 
     private class ProjectHolder extends RecyclerView.ViewHolder
@@ -110,6 +125,7 @@ public class ProjectListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ProjectHolder holder, int position) {
+            System.out.println("The position is " + position);
             Project project = mProjects.get(position);
             holder.bindProject(project);
         }

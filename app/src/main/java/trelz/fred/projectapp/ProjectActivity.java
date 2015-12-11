@@ -11,9 +11,9 @@ public class ProjectActivity extends SingleProjectFragmentActivity {
     private static final String EXTRA_PROJECT_ID =
             "trelz.fred.projectapp.project_id";
 
-    public static Intent newIntent(Context packageContext, UUID crimeId) {
+    public static Intent newIntent(Context packageContext, UUID projectId) {
         Intent intent = new Intent(packageContext, ProjectActivity.class);
-        intent.putExtra(EXTRA_PROJECT_ID, crimeId);
+        intent.putExtra(EXTRA_PROJECT_ID, projectId);
         return intent;
     }
 
