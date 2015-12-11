@@ -1,6 +1,7 @@
 package trelz.fred.projectapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,9 @@ public class ProjectFragment extends Fragment {
         Project p = new Project();
         UUID projectId = (UUID) getArguments().getSerializable(ARG_PROJECT_ID);
         System.out.println(projectId);
+        View b = this.getActivity().findViewById(R.id.add_project);
+        b.setVisibility(View.INVISIBLE);
+
 
         if (ListLab.get(getActivity()).getProjectListSize() == 0) {
             mProject = p;
@@ -64,7 +68,6 @@ public class ProjectFragment extends Fragment {
                 p = ListLab.get(getActivity()).getProject(i);
                 System.out.println(p.getUUID());
                 if (projectId.compareTo(p.getUUID()) != 0) {
-                    System.out.println("This is making a new Project!");
                     p = new Project();
                     mProject = p;
                 }

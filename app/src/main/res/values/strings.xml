@@ -13,4 +13,5 @@
     <string name="add_project">Add a project</string>
     <string name="task_title_hint">Enter a title for your task</string>
     <string name="subtask_title_hint">Enter a title for your subtask</string>
+    <string name="add_task">Add a task</string>
 </resources>

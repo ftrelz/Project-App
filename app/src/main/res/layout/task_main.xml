@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/add_project"
+        android:id="@+id/add_task"
         android:layout_height="wrap_content"
         android:layout_width="93dp"
-        android:text="@string/add_project"
+        android:text="@string/add_task"
         android:layout_gravity="right|bottom"/>
 
 </FrameLayout>

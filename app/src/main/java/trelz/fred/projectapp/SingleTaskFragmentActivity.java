@@ -14,7 +14,7 @@ import android.widget.Button;
 public abstract class SingleTaskFragmentActivity extends FragmentActivity {
 
     protected abstract Fragment createFragment();
-    //private Button mTask;
+    private Button mTask;
 
     // Starts the Fragment
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +31,20 @@ public abstract class SingleTaskFragmentActivity extends FragmentActivity {
             fm.beginTransaction().add(R.id.task_fragment_container, fragment).commit();
         }
 
-        /*mTask = (Button) findViewById(R.id.add_project);
+        mTask = (Button) findViewById(R.id.add_task);
         mTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Fragment project = ProjectFragment.newInstance(null);
+                //View b = findViewById(R.id.add_task);
+                mTask.setVisibility(View.GONE);
+                Fragment task = TaskFragment.newInstance(null);
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.project_fragment_container, project);
+                ft.replace(R.id.task_fragment_container, task);
                 ft.addToBackStack(null);
                 ft.commit();
-
             }
-        });*/
+        });
 
     }
 }

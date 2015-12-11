@@ -32,13 +32,15 @@ public abstract class SingleProjectFragmentActivity extends FragmentActivity {
         }
 
         mProject = (Button) findViewById(R.id.add_project);
+        mProject.setVisibility(View.INVISIBLE);
         mProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("This is printing!");
 
-
-                Fragment project = ProjectFragment.newInstance(null);
+                //View b = findViewById(R.id.add_project);
+                //b.setVisibility(View.GONE);
+                Project p = new Project();
+                Fragment project = ProjectFragment.newInstance(p.getUUID());
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.project_fragment_container, project);
                 ft.addToBackStack(null);

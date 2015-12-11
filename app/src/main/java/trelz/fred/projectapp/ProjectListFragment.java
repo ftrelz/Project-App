@@ -34,6 +34,9 @@ public class ProjectListFragment extends Fragment {
 
         updateUI();
 
+        mProject = (Button) this.getActivity().findViewById(R.id.add_project);
+        mProject.setVisibility(View.VISIBLE);
+
         return view;
     }
 
@@ -47,19 +50,15 @@ public class ProjectListFragment extends Fragment {
     private void updateUI() {
         ListLab listLab = ListLab.get(getActivity());
         List<Project> projects = listLab.getProjects();
-        //List<Project> projects;
-        //ArrayList<Project> temp = new ArrayList<>();
-        //for (int i = 0; i < ListLab.get(getActivity()).getProjectListSize(); i++) {
-            //temp.add(ListLab.get(getActivity()).getProject(i));
-       // }
-        //projects = temp;
+        System.out.println(projects.size());
 
-        if (mAdapter == null) {
-            System.out.println("This is printing when equals to null");
+        if (mAdapter == null)
+        {
             mAdapter = new ProjectAdapter(projects);
             mProjectRecyclerView.setAdapter(mAdapter);
-        } else {
-
+        }
+        else
+        {
             mAdapter.notifyDataSetChanged();
         }
     }

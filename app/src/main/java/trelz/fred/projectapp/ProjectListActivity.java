@@ -12,6 +12,4 @@ public class ProjectListActivity extends SingleProjectFragmentActivity {
         return new ProjectListFragment();
     }
 
-
-
 }
