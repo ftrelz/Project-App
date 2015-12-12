@@ -1,5 +1,8 @@
 package trelz.fred.projectapp;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +11,7 @@ import java.util.UUID;
 /**
  * Created by Fred on 11/20/2015.
  */
-public class Project {
+public class Project implements Serializable {
 
     public Project(String name, Date deadlineDate, Date deadlineTime) {
         this.id = UUID.randomUUID();
@@ -23,6 +26,7 @@ public class Project {
         this.mDeadlineDate = new Date();
         this.mDeadlineTime = new Date();
         this.next = false;
+        this.taskArrayList = new ArrayList<Task>();
     }
 
     public UUID getUUID() {
@@ -87,6 +91,12 @@ public class Project {
 
     public boolean getBool() {return next;}
 
+    public ArrayList<Task> getTasks() {
+        return taskArrayList;
+    }
+    public void setTasks(ArrayList<Task> tasks) {
+        this.taskArrayList = tasks;
+    }
 
     private boolean next;
     private UUID id;
@@ -94,6 +104,6 @@ public class Project {
     private Date mDeadlineDate;
     private Date mDeadlineTime;
     private String description;
-    ArrayList<Task> taskArrayList;
+    private ArrayList<Task> taskArrayList;
 
 }

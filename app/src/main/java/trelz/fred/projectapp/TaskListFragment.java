@@ -20,10 +20,14 @@ public class TaskListFragment extends Fragment {
 
     private RecyclerView mTaskRecyclerView;
     private TaskAdapter mAdapter;
+    private Project mProject;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task_list, container, false);
+
+        TaskListActivity p = new TaskListActivity();
+        mProject = p.getProject();
 
         mTaskRecyclerView = (RecyclerView) view
                 .findViewById(R.id.task_recycler_view);
@@ -33,6 +37,7 @@ public class TaskListFragment extends Fragment {
 
         return view;
     }
+
 
     @Override
 

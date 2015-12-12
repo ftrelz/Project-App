@@ -2,11 +2,14 @@ package trelz.fred.projectapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Parcelable;
+import android.provider.SyncStateContract;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
+import java.io.Serializable;
 import java.util.*;
 
 import android.support.v4.app.FragmentManager;
@@ -164,6 +167,7 @@ public class ProjectFragment extends Fragment {
                 }
 
                 Intent i = new Intent(getActivity(),TaskListActivity.class);
+                i.putExtra("Current_Project", mProject);
                 getActivity().startActivity(i);
 
                 /*Fragment task = SingleTaskFragmentActivity.newInstance(null);

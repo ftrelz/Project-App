@@ -120,9 +120,6 @@ public class TaskFragment extends Fragment{
             }
         });
 
-        //mNextButton = (Button) v.findViewById(R.id.project_time);
-
-
         return v;
     }
 
