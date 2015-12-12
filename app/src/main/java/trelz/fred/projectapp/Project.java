@@ -22,6 +22,7 @@ public class Project {
         this.name = "New Project";
         this.mDeadlineDate = new Date();
         this.mDeadlineTime = new Date();
+        this.next = false;
     }
 
     public UUID getUUID() {
@@ -80,6 +81,14 @@ public class Project {
         return mDeadlineDate.getDay();
     }
 
+    public void setBool(boolean isTrue) {
+        next = isTrue;
+    }
+
+    public boolean getBool() {return next;}
+
+
+    private boolean next;
     private UUID id;
     private String name;
     private Date mDeadlineDate;

@@ -36,9 +36,9 @@ public class ProjectFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
 
-    private void addProjecttoList(Project Object)
+    private void addProjecttoList(Project object)
     {
-        ListLab.get(getActivity()).addObjecttoList(Object);
+        ListLab.get(getActivity()).addObjecttoList(object);
     }
 
 
@@ -74,6 +74,7 @@ public class ProjectFragment extends Fragment {
                 else
                 {
                     mProject = p;
+                    return;
                 }
             }
         }
@@ -156,9 +157,11 @@ public class ProjectFragment extends Fragment {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("This is printing!");
 
-                addProjecttoList(mProject);
+                if (mProject.getBool() == false) {
+                    mProject.setBool(true);
+                    addProjecttoList(mProject);
+                }
 
                 Intent i = new Intent(getActivity(),TaskListActivity.class);
                 getActivity().startActivity(i);
