@@ -5,7 +5,6 @@ package trelz.fred.projectapp;
  */
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.app.Fragment;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectListFragment extends Fragment {
@@ -28,8 +26,8 @@ public class ProjectListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
 
-        ListLab listLab = ListLab.get(getActivity());
-        List<Project> projects = listLab.getProjects();
+        ProjectLab projectLab = ProjectLab.get(getActivity());
+        List<Project> projects = projectLab.getProjects();
 
         mProjectRecyclerView = (RecyclerView) view
                     .findViewById(R.id.project_recycler_view);
@@ -38,7 +36,6 @@ public class ProjectListFragment extends Fragment {
         if (mAdapter == null)
         {
             mAdapter = new ProjectAdapter(projects);
-
         }
 
         mProjectRecyclerView.setAdapter(mAdapter);
@@ -58,24 +55,11 @@ public class ProjectListFragment extends Fragment {
     }
 
     private void updateUI() {
-        ListLab listLab = ListLab.get(getActivity());
-        List<Project> projects = listLab.getProjects();
+        ProjectLab projectLab = ProjectLab.get(getActivity());
+        List<Project> projects = projectLab.getProjects();
 
-        /*if (mAdapter == null)
-        {
-            System.out.println("this is making an adapter!");
-            mAdapter = new ProjectAdapter(projects);
-        }
-
-        if (!(mAdapter.hasObservers()))
-        {
-            mProjectRecyclerView.setAdapter(mAdapter);
-        }
-        else
-        {*/
-            mAdapter.notifyDataSetChanged();
-            mProjectRecyclerView.setAdapter(mAdapter);
-        //}
+        mAdapter.notifyDataSetChanged();
+        mProjectRecyclerView.setAdapter(mAdapter);
     }
 
     private class ProjectHolder extends RecyclerView.ViewHolder

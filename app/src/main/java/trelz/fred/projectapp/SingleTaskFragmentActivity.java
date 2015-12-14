@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import trelz.fred.projectapp.TaskFragment;
 
 /**
  * Created by jc_cisneros21 on 12/1/15.
@@ -37,8 +38,9 @@ public abstract class SingleTaskFragmentActivity extends FragmentActivity {
             public void onClick(View v) {
 
                 //View b = findViewById(R.id.add_task);
-                mTask.setVisibility(View.GONE);
-                Fragment task = TaskFragment.newInstance(null);
+                //mTask.setVisibility(View.GONE);
+                Task t = new Task();
+                Fragment task = TaskFragment.newInstance(t.getUUID());
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.task_fragment_container, task);
                 ft.addToBackStack(null);

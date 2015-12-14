@@ -20,6 +20,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".TaskActivity"
+            android:label="TActivity">
+        </activity>
+        <activity
             android:name=".TaskListActivity"
             android:label="SingleTask" >
         </activity>

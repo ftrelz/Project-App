@@ -1,5 +1,6 @@
 package trelz.fred.projectapp;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,8 +18,9 @@ public class TaskListActivity extends SingleTaskFragmentActivity {
 
         Intent i = getIntent();
 
-        currentProject = (Project) i.getSerializableExtra("Current_Project");
-        System.out.println(currentProject.getName());
+        //currentProject = (Project) i.getSerializableExtra("Current_Project");
+        currentProject = ProjectFragment.mProject;
+        System.out.println("This is the current Project " + currentProject.getName());
     }
 
     public Project getProject()

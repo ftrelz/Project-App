@@ -94,6 +94,7 @@ public class Project implements Serializable {
     public ArrayList<Task> getTasks() {
         return taskArrayList;
     }
+
     public void setTasks(ArrayList<Task> tasks) {
         this.taskArrayList = tasks;
     }

@@ -1,15 +1,10 @@
 package trelz.fred.projectapp;
 
 import android.app.Activity;
-import android.content.Context;
-import android.os.Parcelable;
-import android.provider.SyncStateContract;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
-import java.io.Serializable;
 import java.util.*;
 
 import android.support.v4.app.FragmentManager;
@@ -27,7 +22,7 @@ import android.widget.EditText;
 public class ProjectFragment extends Fragment {
 
     private static final String ARG_PROJECT_ID = "project_id";
-    private Project mProject;
+    public static Project mProject;
     private EditText mTitleField;
     private EditText mDescriptionField;
     private Button mDateButton;
@@ -41,7 +36,11 @@ public class ProjectFragment extends Fragment {
 
     private void addProjecttoList(Project object)
     {
-        ListLab.get(getActivity()).addObjecttoList(object);
+        ProjectLab.get(getActivity()).addProjecttoList(object);
+    }
+
+    public Project getProject() {
+        return mProject;
     }
 
 
@@ -63,12 +62,12 @@ public class ProjectFragment extends Fragment {
         b.setVisibility(View.INVISIBLE);
 
 
-        if (ListLab.get(getActivity()).getProjectListSize() == 0) {
+        if (ProjectLab.get(getActivity()).getProjectListSize() == 0) {
             mProject = p;
         } else {
-            for (int i = 0; i < ListLab.get(getActivity()).getProjectListSize(); i++) {
+            for (int i = 0; i < ProjectLab.get(getActivity()).getProjectListSize(); i++) {
                 System.out.println("This is printing in oncreate!");
-                p = ListLab.get(getActivity()).getProject(i);
+                p = ProjectLab.get(getActivity()).getProject(i);
                 System.out.println(p.getUUID());
                 if (projectId.compareTo(p.getUUID()) != 0) {
                     p = new Project();
@@ -81,7 +80,7 @@ public class ProjectFragment extends Fragment {
                 }
             }
         }
-        //mTask = ListLab.get(getActivity()).getTask(taskId);
+        //mTask = ProjectLab.get(getActivity()).getTask(taskId);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -167,7 +166,7 @@ public class ProjectFragment extends Fragment {
                 }
 
                 Intent i = new Intent(getActivity(),TaskListActivity.class);
-                i.putExtra("Current_Project", mProject);
+                //i.putExtra("Current_Project", mProject);
                 getActivity().startActivity(i);
 
                 /*Fragment task = SingleTaskFragmentActivity.newInstance(null);

@@ -12,7 +12,7 @@ public class TaskActivity extends SingleTaskFragmentActivity {
             "trelz.fred.projectapp.task_id";
 
     public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, ProjectActivity.class);
+        Intent intent = new Intent(packageContext, TaskActivity.class);
         intent.putExtra(EXTRA_TASK_ID, crimeId);
         return intent;
     }
@@ -20,6 +20,6 @@ public class TaskActivity extends SingleTaskFragmentActivity {
     protected Fragment createFragment() {
         UUID projectId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_TASK_ID);
-        return ProjectFragment.newInstance(projectId);
+        return TaskFragment.newInstance(projectId);
     }
 }

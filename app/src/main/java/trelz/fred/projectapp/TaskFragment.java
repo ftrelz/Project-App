@@ -24,7 +24,6 @@ public class TaskFragment extends Fragment{
     private static final String ARG_TASK_ID = "task_id";
     private Task mTask;
     private EditText mTitleField;
-    private EditText mDescriptionField;
     private Button mDateButton;
     private Button mTimeButton;
 
@@ -33,9 +32,9 @@ public class TaskFragment extends Fragment{
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
 
-    private void addTasktoList(Task Object)
+    private void addTasktoList(Task task)
     {
-        ListLab.get(getActivity()).addObjecttoList(Object);
+        TaskLab.get(getActivity()).addTasktoList(task);
     }
 
 
@@ -52,19 +51,29 @@ public class TaskFragment extends Fragment{
         super.onCreate(savedInstanceState);
         Task t = new Task();
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
+        System.out.println(taskId);
+        View b = this.getActivity().findViewById(R.id.add_task);
+        b.setVisibility(View.INVISIBLE);
 
-        if (ListLab.get(getActivity()).getTaskListSize() == 0) {
+
+        if (TaskLab.get(getActivity()).getTaskListSize() == 0) {
             mTask = t;
         } else {
-            for (int i = 0; i < ListLab.get(getActivity()).getTaskListSize(); i++) {
-                t = (Task) ListLab.get(getActivity()).getTask(i);
-                if (t.getUUID() == taskId) {
+            for (int i = 0; i < TaskLab.get(getActivity()).getTaskListSize(); i++) {
+                System.out.println("This is printing in oncreate!");
+                t = TaskLab.get(getActivity()).getTask(i);
+                System.out.println(t.getUUID());
+                if (taskId.compareTo(t.getUUID()) != 0) {
+                    t = new Task();
+                    mTask = t;
+                }
+                else
+                {
                     mTask = t;
                     return;
                 }
             }
         }
-        //mTask = ListLab.get(getActivity()).getTask(taskId);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -119,6 +128,11 @@ public class TaskFragment extends Fragment{
                 dialog.show(manager, DIALOG_TIME);
             }
         });
+
+        if (mTask.getBool() == false) {
+            mTask.setBool(true);
+            addTasktoList(mTask);
+        }
 
         return v;
     }

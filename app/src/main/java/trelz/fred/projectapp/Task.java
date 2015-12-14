@@ -20,6 +20,7 @@ public class Task {
         mId = UUID.randomUUID();
         mDeadlineDate = new Date();
         mDeadlineTime = new Date();
+        this.next = false;
     }
 
     public String getName() {
@@ -86,7 +87,14 @@ public class Task {
         return mDeadlineDate.getDay();
     }
 
+    public void setBool(boolean isTrue) {
+        next = isTrue;
+    }
+
+    public boolean getBool() {return next;}
+
     private UUID mId;
+    private boolean next;
     private String mName;
     private Date mDeadlineDate;
     private Date mDeadlineTime;
