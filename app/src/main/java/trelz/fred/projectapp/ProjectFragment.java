@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 /**
@@ -28,6 +29,10 @@ public class ProjectFragment extends Fragment {
     private Button mDateButton;
     private Button mTimeButton;
     private Button mNextButton;
+    private CheckBox mDeleteBox;
+    private boolean delete_on;
+    private int project_index;
+    private boolean new_project_check;
 
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
@@ -75,6 +80,7 @@ public class ProjectFragment extends Fragment {
                 }
                 else
                 {
+                    project_index = i;
                     mProject = p;
                     return;
                 }
@@ -85,6 +91,8 @@ public class ProjectFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_project, container, false);
+
+        delete_on = false;
 
         mTitleField = (EditText) v.findViewById(R.id.project_title);
         if (mProject.getName() == "") {
@@ -155,26 +163,48 @@ public class ProjectFragment extends Fragment {
             }
         });
 
+        mDeleteBox = (CheckBox) v.findViewById(R.id.delete_project);
+        mDeleteBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Project p = new Project();
+               if (mDeleteBox.isChecked() == true) {
+                   delete_on = true;
+                   if (mProject.getBool() == false) {
+                       new_project_check = true;
+                       mProject.setBool(true);
+                   } else {
+                       ProjectLab.get(getActivity()).deleteProject(project_index);
+                   }
+               }
+               else {
+                   delete_on = false;
+                   if (new_project_check == true) {
+                       new_project_check = false;
+                       mProject.setBool(false);
+                   }
+                   else {
+                       ProjectLab.get(getActivity()).addProjectIndex(project_index,mProject);
+                   }
+               }
+            }
+        });
+
         mNextButton = (Button) v.findViewById(R.id.poject_next);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (mProject.getBool() == false) {
+                if (mProject.getBool() == false && delete_on == false) {
                     mProject.setBool(true);
                     addProjecttoList(mProject);
                 }
 
-                Intent i = new Intent(getActivity(),TaskListActivity.class);
-                //i.putExtra("Current_Project", mProject);
-                getActivity().startActivity(i);
-
-                /*Fragment task = SingleTaskFragmentActivity.newInstance(null);
-                FragmentTransaction ft;
-                ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.project_fragment_container, task);
-                ft.addToBackStack(null);
-                ft.commit();*/
+                if ( delete_on == false) {
+                    Intent i = new Intent(getActivity(), TaskListActivity.class);
+                    //i.putExtra("Current_Project", mProject);
+                    getActivity().startActivity(i);
+                }
             }
         });
 

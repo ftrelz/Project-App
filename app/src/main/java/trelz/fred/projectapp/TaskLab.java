@@ -58,6 +58,17 @@ public class TaskLab {
         mProject.setTasks(mTasks);
     }
 
+    public void deleteTask(int index)
+    {
+        mTasks.remove(index);
+        mProject.setTasks(mTasks);
+    }
+
+    public void addTaskIndex(int index, Task task) {
+        mTasks.add(index, task);
+        mProject.setTasks(mTasks);
+    }
+
     public int getTaskListSize()
     {
         return mTasks.size();

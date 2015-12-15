@@ -49,6 +49,16 @@ public class ProjectLab {
         System.out.println(mProjects.get(0).getName());
     }
 
+    public void deleteProject(int index)
+    {
+        mProjects.remove(index);
+    }
+
+    public void addProjectIndex(int index, Project project)
+    {
+        mProjects.add(index,project);
+    }
+
     public int getProjectListSize()
     {
         return mProjects.size();

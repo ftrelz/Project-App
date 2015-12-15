@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 /**
@@ -26,6 +27,10 @@ public class TaskFragment extends Fragment{
     private EditText mTitleField;
     private Button mDateButton;
     private Button mTimeButton;
+    private CheckBox mDeleteBox;
+    private boolean delete_on;
+    private int task_index;
+    private boolean new_task_check;
 
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
@@ -51,7 +56,6 @@ public class TaskFragment extends Fragment{
         super.onCreate(savedInstanceState);
         Task t = new Task();
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
-        System.out.println(taskId);
         View b = this.getActivity().findViewById(R.id.add_task);
         b.setVisibility(View.INVISIBLE);
 
@@ -60,15 +64,14 @@ public class TaskFragment extends Fragment{
             mTask = t;
         } else {
             for (int i = 0; i < TaskLab.get(getActivity()).getTaskListSize(); i++) {
-                System.out.println("This is printing in oncreate!");
                 t = TaskLab.get(getActivity()).getTask(i);
-                System.out.println(t.getUUID());
                 if (taskId.compareTo(t.getUUID()) != 0) {
                     t = new Task();
                     mTask = t;
                 }
                 else
                 {
+                    task_index = i;
                     mTask = t;
                     return;
                 }
@@ -78,6 +81,8 @@ public class TaskFragment extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
+
+        delete_on = false;
 
         mTitleField = (EditText) v.findViewById(R.id.task_title);
         if (mTask.getName() == "") {
@@ -129,9 +134,35 @@ public class TaskFragment extends Fragment{
             }
         });
 
-        if (mTask.getBool() == false) {
-            mTask.setBool(true);
-            addTasktoList(mTask);
+        mDeleteBox = (CheckBox) v.findViewById(R.id.delete_task);
+        mDeleteBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDeleteBox.isChecked() == true) {
+                    delete_on = true;
+                    if (mTask.getBool() == false) {
+                        new_task_check = true;
+                    } else {
+                        TaskLab.get(getActivity()).deleteTask(task_index);
+                    }
+                }
+                else {
+                    delete_on = false;
+                    if (new_task_check == true) {
+                        new_task_check = false;
+                    }
+                    else {
+                        TaskLab.get(getActivity()).addTaskIndex(task_index,mTask);
+                    }
+                }
+            }
+        });
+
+        if (delete_on == false) {
+            if (mTask.getBool() == false) {
+                mTask.setBool(true);
+                addTasktoList(mTask);
+            }
         }
 
         return v;

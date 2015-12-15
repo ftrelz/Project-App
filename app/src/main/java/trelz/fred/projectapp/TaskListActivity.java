@@ -20,7 +20,6 @@ public class TaskListActivity extends SingleTaskFragmentActivity {
 
         //currentProject = (Project) i.getSerializableExtra("Current_Project");
         currentProject = ProjectFragment.mProject;
-        System.out.println("This is the current Project " + currentProject.getName());
     }
 
     public Project getProject()
