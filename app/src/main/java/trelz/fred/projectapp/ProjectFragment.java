@@ -39,16 +39,18 @@ public class ProjectFragment extends Fragment {
     private static final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
 
+    // method to add Projects to ProjectLab
     private void addProjecttoList(Project object)
     {
         ProjectLab.get(getActivity()).addProjecttoList(object);
     }
 
+    // Getting a certain project
     public Project getProject() {
         return mProject;
     }
 
-
+    // Method for Instance of ProjectFragment
     public static ProjectFragment newInstance(UUID projectId){
         Bundle args = new Bundle();
         args.putSerializable(ARG_PROJECT_ID, projectId);
@@ -58,6 +60,8 @@ public class ProjectFragment extends Fragment {
         return fragment;
     }
 
+    // Starts ProjectFragment and is used to to retrieve the
+    // Project the user is working on.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Project p = new Project();
@@ -65,7 +69,8 @@ public class ProjectFragment extends Fragment {
         View b = this.getActivity().findViewById(R.id.add_project);
         b.setVisibility(View.INVISIBLE);
 
-
+        // Retrieves the project we are working on or if a new project
+        // we will create a new Instance of Project.
         if (ProjectLab.get(getActivity()).getProjectListSize() == 0) {
             mProject = p;
         } else {
@@ -90,6 +95,7 @@ public class ProjectFragment extends Fragment {
 
         delete_on = false;
 
+        // Retrieves the project's title the user inputs
         mTitleField = (EditText) v.findViewById(R.id.project_title);
         if (mProject.getName() == "") {
             mTitleField.setText("New Project");
@@ -114,6 +120,7 @@ public class ProjectFragment extends Fragment {
             }
         });
 
+        // Retrieves the Project's Description from the user
         mDescriptionField = (EditText) v.findViewById(R.id.project_description);
         mDescriptionField.setText(mProject.getDescription());
         mDescriptionField.addTextChangedListener(new TextWatcher() {
@@ -133,6 +140,7 @@ public class ProjectFragment extends Fragment {
             }
         });
 
+        // Retrieves the date from the user
         mDateButton = (Button) v.findViewById(R.id.project_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +154,7 @@ public class ProjectFragment extends Fragment {
             }
         });
 
+        // Retrieves the time from the user
         mTimeButton = (Button) v.findViewById(R.id.project_time);
         updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
@@ -159,11 +168,13 @@ public class ProjectFragment extends Fragment {
             }
         });
 
+        // If the box is check, the project is deleted
         mDeleteBox = (CheckBox) v.findViewById(R.id.delete_project);
         mDeleteBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Project p = new Project();
+                // If we check the box we delete the project
                if (mDeleteBox.isChecked() == true) {
                    delete_on = true;
                    if (mProject.getBool() == false) {
@@ -174,6 +185,7 @@ public class ProjectFragment extends Fragment {
                    }
                }
                else {
+                   // If we uncheck the box, we keep the project
                    delete_on = false;
                    if (new_project_check == true) {
                        new_project_check = false;
@@ -186,11 +198,14 @@ public class ProjectFragment extends Fragment {
             }
         });
 
+        // If the certain conditions are met, the project is deleted
         if (mProject.getBool() == false && delete_on == false) {
             mProject.setBool(true);
             addProjecttoList(mProject);
         }
 
+        // The next button opens up the TaskListActivity, which is the
+        // task list
         mNextButton = (Button) v.findViewById(R.id.poject_next);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,7 +226,7 @@ public class ProjectFragment extends Fragment {
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
-
+            // retrieves the Date from DateFragment
             if (requestCode == REQUEST_DATE) {
                 Date date = (Date) data
                         .getSerializableExtra(DateFragment.USER_DATE);
@@ -223,6 +238,7 @@ public class ProjectFragment extends Fragment {
                 updateTime();
             }
 
+            // retrieves the Time from TimeFragment
             if (requestCode == REQUEST_TIME) {
                 Date time = (Date) data
                         .getSerializableExtra(TimeFragment.USER_TIME);
@@ -236,10 +252,12 @@ public class ProjectFragment extends Fragment {
             }
     }
 
+    // Updates the Date
     private void updateDate() {
         mDateButton.setText(mProject.getDeadlineDate().toString());
     }
 
+    // Udaptes the Time
     private void updateTime() {
         mTimeButton.setText(mProject.getDeadlineTime().toString());
     }

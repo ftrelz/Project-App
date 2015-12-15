@@ -18,7 +18,8 @@ public class TaskListActivity extends SingleTaskFragmentActivity {
 
         Intent i = getIntent();
 
-        //currentProject = (Project) i.getSerializableExtra("Current_Project");
+        // currentProject = (Project) i.getSerializableExtra("Current_Project");
+        // Gets the current Project
         currentProject = ProjectFragment.mProject;
     }
 

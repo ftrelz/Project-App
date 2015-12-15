@@ -62,10 +62,12 @@ public class ProjectListFragment extends Fragment {
         mProjectRecyclerView.setAdapter(mAdapter);
     }
 
+    // Is used to obtain information about the tasks
     private class ProjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
+        private TextView mDescriptionView;
         private TextView mTimeTextView;
 
         private Project mProject;
@@ -75,13 +77,14 @@ public class ProjectListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_project_title);
-            mTitleTextView = (TextView) itemView.findViewById(R.id.list_project_description);
+            mDescriptionView = (TextView) itemView.findViewById(R.id.list_project_description);
             mTimeTextView = (TextView) itemView.findViewById(R.id.list_project_time);
         }
 
         public void bindProject(Project p) {
             mProject = p;
             mTitleTextView.setText(mProject.getName());
+            mDescriptionView.setText(mProject.getDescription());
             mTimeTextView.setText(mProject.getDeadlineTime().toString());
         }
 
@@ -92,6 +95,8 @@ public class ProjectListFragment extends Fragment {
         }
     }
 
+    // ProjectAdapter is automatically called by setting the Adapter.
+    // Once set these methods will then be implemented on their own.
     private class ProjectAdapter extends RecyclerView.Adapter<ProjectHolder> {
 
         private List<Project> mProjects;

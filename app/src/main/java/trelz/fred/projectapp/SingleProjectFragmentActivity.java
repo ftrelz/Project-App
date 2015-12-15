@@ -16,7 +16,7 @@ public abstract class SingleProjectFragmentActivity extends FragmentActivity {
     protected abstract Fragment createFragment();
     private Button mProject;
 
-    // Starts the Fragment
+    // Starts SingleProjectFragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         // create an FragmentActivity
@@ -31,14 +31,13 @@ public abstract class SingleProjectFragmentActivity extends FragmentActivity {
             fm.beginTransaction().add(R.id.project_fragment_container, fragment).commit();
         }
 
+        // Adds a new Project to the list of Projects
         mProject = (Button) findViewById(R.id.add_project);
         mProject.setVisibility(View.INVISIBLE);
         mProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //View b = findViewById(R.id.add_project);
-                //b.setVisibility(View.GONE);
                 Project p = new Project();
                 Fragment project = ProjectFragment.newInstance(p.getUUID());
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

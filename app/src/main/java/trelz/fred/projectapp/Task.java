@@ -22,6 +22,7 @@ public class Task {
         mDeadlineDate = new Date();
         mDeadlineTime = new Date();
         next = false;
+        complete = false;
     }
 
     public String getName() {
@@ -86,7 +87,16 @@ public class Task {
 
     public boolean getBool() {return next;}
 
+    public void setCompleted(boolean bool) {
+        complete = bool;
+    }
+
+    public boolean getCompleted(boolean bool) {
+        return complete;
+    }
+
     private UUID mId;
+    private boolean complete;
     private boolean next;
     private String mName;
     private Date mDeadlineDate;

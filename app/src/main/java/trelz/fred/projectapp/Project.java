@@ -10,6 +10,9 @@ import java.util.UUID;
 
 /**
  * Created by Fred on 11/20/2015.
+ * Projects will contain its certain tasks and if
+ * accessed, these tasks will then show up it the
+ * tasks list layout
  */
 public class Project implements Serializable {
 
@@ -22,7 +25,8 @@ public class Project implements Serializable {
 
     public Project() {
         this.id = UUID.randomUUID();
-        this.name = "New Project";
+        this.name = "Project Title";
+        this.description = "Project Description";
         this.mDeadlineDate = new Date();
         this.mDeadlineTime = new Date();
         this.next = false;

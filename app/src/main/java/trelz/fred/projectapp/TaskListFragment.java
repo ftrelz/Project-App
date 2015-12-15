@@ -3,7 +3,6 @@ package trelz.fred.projectapp;
 /**
  * Created by jc_cisneros21 on 11/30/15.
  */
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListFragment extends Fragment {
@@ -56,7 +54,6 @@ public class TaskListFragment extends Fragment {
 
 
     @Override
-
     public void onResume() {
         super.onResume();
         updateUI();
@@ -85,7 +82,6 @@ public class TaskListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_task_title);
-            mTitleTextView = (TextView) itemView.findViewById(R.id.list_task_description);
             mTimeTextView = (TextView) itemView.findViewById(R.id.list_task_time);
         }
 
@@ -97,6 +93,7 @@ public class TaskListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+
             Intent intent = TaskActivity.newIntent(getActivity(), mTask.getUUID());
             startActivity(intent);
         }

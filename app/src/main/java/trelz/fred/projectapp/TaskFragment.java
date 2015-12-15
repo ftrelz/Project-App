@@ -82,8 +82,11 @@ public class TaskFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_task, container, false);
 
+        // Set delet_on to false so we know
+        // that we don't have to delete the project
         delete_on = false;
 
+        // User inserts his title for Task
         mTitleField = (EditText) v.findViewById(R.id.task_title);
         if (mTask.getName() == "") {
             mTitleField.setText("New Task");
@@ -108,6 +111,7 @@ public class TaskFragment extends Fragment{
             }
         });
 
+        // User picks Task's Date
         mDateButton = (Button) v.findViewById(R.id.task_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +125,7 @@ public class TaskFragment extends Fragment{
             }
         });
 
+        // User picks Task's Time
         mTimeButton = (Button) v.findViewById(R.id.task_time);
         updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +139,7 @@ public class TaskFragment extends Fragment{
             }
         });
 
+        // Deletes the Task
         mDeleteBox = (CheckBox) v.findViewById(R.id.delete_task);
         mDeleteBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +164,8 @@ public class TaskFragment extends Fragment{
             }
         });
 
+        // Adds the Task to the Arraylist if the
+        // conditions are met.
         if (delete_on == false) {
             if (mTask.getBool() == false) {
                 mTask.setBool(true);
@@ -173,6 +181,7 @@ public class TaskFragment extends Fragment{
             return;
         }
 
+        // User sets the date
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data
                     .getSerializableExtra(DateFragment.USER_DATE);
@@ -184,6 +193,7 @@ public class TaskFragment extends Fragment{
             updateTime();
         }
 
+        // User sets the time
         if (requestCode == REQUEST_TIME) {
             Date time = (Date) data
                     .getSerializableExtra(TimeFragment.USER_TIME);
@@ -197,10 +207,12 @@ public class TaskFragment extends Fragment{
         }
     }
 
+    // Updating Date
     private void updateDate() {
         mDateButton.setText(mTask.getDeadlineDate().toString());
     }
 
+    // Updating Time
     private void updateTime() {
         mTimeButton.setText(mTask.getDeadlineTime().toString());
     }

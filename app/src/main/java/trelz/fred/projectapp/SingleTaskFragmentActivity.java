@@ -37,8 +37,6 @@ public abstract class SingleTaskFragmentActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                //View b = findViewById(R.id.add_task);
-                //mTask.setVisibility(View.GONE);
                 Task t = new Task();
                 Fragment task = TaskFragment.newInstance(t.getUUID());
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
