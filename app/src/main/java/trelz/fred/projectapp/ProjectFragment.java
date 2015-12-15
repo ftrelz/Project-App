@@ -62,7 +62,6 @@ public class ProjectFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Project p = new Project();
         UUID projectId = (UUID) getArguments().getSerializable(ARG_PROJECT_ID);
-        System.out.println(projectId);
         View b = this.getActivity().findViewById(R.id.add_project);
         b.setVisibility(View.INVISIBLE);
 
@@ -71,9 +70,7 @@ public class ProjectFragment extends Fragment {
             mProject = p;
         } else {
             for (int i = 0; i < ProjectLab.get(getActivity()).getProjectListSize(); i++) {
-                System.out.println("This is printing in oncreate!");
                 p = ProjectLab.get(getActivity()).getProject(i);
-                System.out.println(p.getUUID());
                 if (projectId.compareTo(p.getUUID()) != 0) {
                     p = new Project();
                     mProject = p;
@@ -86,7 +83,6 @@ public class ProjectFragment extends Fragment {
                 }
             }
         }
-        //mTask = ProjectLab.get(getActivity()).getTask(taskId);
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -190,15 +186,15 @@ public class ProjectFragment extends Fragment {
             }
         });
 
+        if (mProject.getBool() == false && delete_on == false) {
+            mProject.setBool(true);
+            addProjecttoList(mProject);
+        }
+
         mNextButton = (Button) v.findViewById(R.id.poject_next);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (mProject.getBool() == false && delete_on == false) {
-                    mProject.setBool(true);
-                    addProjecttoList(mProject);
-                }
 
                 if ( delete_on == false) {
                     Intent i = new Intent(getActivity(), TaskListActivity.class);

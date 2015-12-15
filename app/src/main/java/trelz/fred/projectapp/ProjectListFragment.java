@@ -109,7 +109,6 @@ public class ProjectListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ProjectHolder holder, int position) {
-            System.out.println("The position is " + position);
             Project project = mProjects.get(position);
             holder.bindProject(project);
         }

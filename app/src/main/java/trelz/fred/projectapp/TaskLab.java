@@ -23,13 +23,6 @@ public class TaskLab {
 
     private TaskLab(Context context) {
         mTasks = new ArrayList<>();
-
-        //mTasks = mProject.getTasks();
-        /*for (int i = 0; i < 100; i++) {
-            Task task = new Task();
-            task.setName("Task #" + i);
-            mObjects.add(task);
-        }*/
     }
 
     public void setProject(Project p)

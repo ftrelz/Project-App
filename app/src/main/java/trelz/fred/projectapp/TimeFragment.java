@@ -61,7 +61,6 @@ public class TimeFragment extends DialogFragment{
                             public void onClick(DialogInterface dialog, int which) {
                                 int hour = 0;
                                 int minute = 0;
-                                System.out.println("GETTING HOUR AND MINUTE");
                                 hour = mTime.getCurrentHour();
                                 minute = mTime.getCurrentMinute();
                                 int year = calendar.get(Calendar.YEAR);

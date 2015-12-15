@@ -18,9 +18,10 @@ public class Task {
 
     public Task() {
         mId = UUID.randomUUID();
+        mName = "New Task";
         mDeadlineDate = new Date();
         mDeadlineTime = new Date();
-        this.next = false;
+        next = false;
     }
 
     public String getName() {
@@ -49,14 +50,6 @@ public class Task {
 
     public void setDeadlineTime(Date newDeadlineTime) {
         mDeadlineTime = newDeadlineTime;
-    }
-
-    public void setDescription(String newDescription) {
-        description = newDescription;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void addSubTask(int index, SubTask task) {
@@ -98,6 +91,5 @@ public class Task {
     private String mName;
     private Date mDeadlineDate;
     private Date mDeadlineTime;
-    private String description;
     private ArrayList<SubTask> subTaskArrayList;
 }

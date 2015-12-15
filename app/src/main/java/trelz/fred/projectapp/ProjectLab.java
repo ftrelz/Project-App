@@ -46,7 +46,6 @@ public class ProjectLab {
     public void addProjecttoList(Project project)
     {
         mProjects.add(project);
-        System.out.println(mProjects.get(0).getName());
     }
 
     public void deleteProject(int index)
